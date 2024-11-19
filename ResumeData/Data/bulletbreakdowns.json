@@ -1,0 +1,71 @@
+{
+    "technology": [
+        "Windows",
+        ".Net/.Net Core",
+        "HyperV",
+        "IIS",
+        "Plesk Control Panel",
+        "MsSql",
+        "Git/Github",
+        "Github Actions",
+        "Jenkins",
+        "Jira",
+        "AWS Secrets Manager",
+        "Azure",
+        "MySql",
+        "React/Redux",
+        "Mermaid",
+        "Service Now (API)",
+        "Slack (API)",
+        "Nuget/Chocolatey",
+        "Linux",
+        "NginX",
+        "Openstack",
+        "Docker"
+    ],
+    "languages": [
+        "C#",
+        "Powershell",
+        "Java",
+        "Groovy",
+        "Python",
+        "Bash",
+        "C/C++",
+        "Javascript",
+        "GoLang",
+        "PHP"
+    ],
+    "devPractices": [
+        "Scrum Development",
+        "Kanban",
+        "Test Driven Development (TDD)",
+        "Behavior Driven Development (BDD)",
+        "Unit Testing",
+        "Performance/Load Testing",
+        "Fuzz Testing",
+        "Penetration Testing",
+        "Threat Modeling",
+        "CI/CD Systems"
+    ],
+    "hobbies": [
+        {
+            "name": "Kenpo Karate",
+             "properties": [
+                "1st Grade Black Belt",
+                "Student Instructor"
+            ]
+        },
+        {
+            "name": "Tae Kwon Do",
+             "properties": [
+                "1st Dan Black Belt"
+            ]
+        },
+        {
+            "name":"Avid Gamer (table top and video)"
+        },
+        {
+            "name":"Movie Buff"
+        }
+    ]
+}
