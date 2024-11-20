@@ -3,8 +3,11 @@ using System.Text.Json.Serialization;
 
 namespace ResumeData.Data;
 
-public class BulletPoints
+public class Expertise: DataFile<Expertise>
 {
+    protected override string FileName => "bulletbreakdowns.json";
+
+
     [JsonPropertyName("technology")]
     public string[] Technology { get; set; }
     
@@ -16,23 +19,7 @@ public class BulletPoints
 
     [JsonPropertyName("hobbies")]
     public Hobbies[] Hobbies { get; set; }
-
-    public static BulletPoints? FromDataFile
-    {
-        get
-        {
-            string breakdownPath = ".\\data\\bulletbreakdowns.json";
-            if (!File.Exists(breakdownPath))
-            {
-                throw new FileNotFoundException($"bullet breakdown file not found: {breakdownPath}");
-            }
-            
-            string rawData = File.ReadAllText(breakdownPath);
-
-            return JsonSerializer.Deserialize<BulletPoints>(rawData);
-        }
-    }
-
+    
 }
 
 public class Hobbies
