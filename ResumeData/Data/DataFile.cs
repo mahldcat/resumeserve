@@ -8,7 +8,7 @@ public abstract class DataFile<T> where T:DataFile<T>,new()
 
     public static T? FromFile() 
     {  
-        string filePath = $".\\data\\{new T().FileName}.json";
+        string filePath = $".\\data\\{new T().FileName}";
 
         if (!File.Exists(filePath))
         {
