@@ -1,0 +1,14 @@
+{
+  "schools": [
+    {
+      "name": "Portland State University",
+      "degree": "Masters",
+      "field": "Computer Science"
+    },
+    {
+      "name": "Millersville University",
+      "degree": "Bachelor of Science Education",
+      "field": "Mathematics"
+    }
+  ]
+}

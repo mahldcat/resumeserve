@@ -14,10 +14,28 @@ namespace ResumeData.Controllers
             return "Sample Test";
         }
 
-        [Route("expertise")]
-        public BulletPoints? Expertise()
+        [Route("profile")]
+        public Profile? Profile()
         {
-            return BulletPoints.FromDataFile;
+            return Data.Profile.FromFile();
+        }
+        
+        [Route("expertise")]
+        public Expertise? Expertise()
+        {
+            return Data.Expertise.FromFile();
+        }
+
+        [Route("education")]
+        public Education? Education()
+        {
+            return Data.Education.FromFile();
+        }
+
+        [Route("experience")]
+        public Experience? Experience()
+        {
+            return Data.Experience.FromFile();
         }
     }
 }

@@ -1,0 +1,68 @@
+{
+  "experience": [
+    {
+      "startDate": "2011",
+      "endDate": "2024",
+      "companyName": "GoDaddy",
+      "jobTitle": "Lead Developer and Manager",
+      "teamName": "Windows Hosting using Plesk",
+      "jobfunctions": {
+        "Customer focus": [
+          "Managed the hosting platform that hosts 490,000 individual websites consuming ~300 TB of data, 120,000 MSSQL servers and 145,000 MySql databases",
+          "I handled over 90% of our customer tickets, ~30% used to improve the product",
+          "Involved Customer Care in our day to day operations",
+          "Involved with Service Now Automation—CI/CD automation and Incident Creation leading to faster deployments and better incident tracking",
+          "Worked with SRE to deploy metricbeats, allowing us to quickly identify where we could improve performance, and identify potentially abusive customers."
+        ],
+        "Management, Mentorship, Cross team collaboration": [
+          "Partnered with my team's PM to oversee, plan and cost out our initiatives",
+          "Managed a team of developers overseeing their careers and promotions",
+          "Successfully mentored multiple college interns, each leading to a job offer",
+          "Almost daily collaboration with partner teams over Zoom and Slack"
+        ],
+        "SDLC": [
+          "Scrum master for more than 8 years using Jira as the task management system",
+          "Owned and Developed my team’s CI/CD workflows",
+          "Migrated many of our systems onto chocolatey-- simplifying deployments",
+          "Have been using a Pull Request/Peer review process for > 10 years"
+        ],
+        "Simplification": [
+          "Eliminated 80% of our internal APIs",
+          "Continuous refactoring of our REST APIs, leading to a 20% code reduction in 2023",
+          "Conversion from .net 4.8 to .net 8 leading to further code simplification",
+          "Converted team over to a new ecommerce system simplifying account management" 
+        ],
+        "Complex Project Management": [
+          "Successfully migrated more than 130,000 customer from legacy hosting to Plesk",
+          "Hypervisor and VM upgrades ( > 800 servers) to latest Windows / Plesk",
+          "Data Center moves/reorganizations involving more than 80 web hosts",
+          "Bulk customer DNS updates (more than 100,000 sites to date)"
+        ],
+        "Security Champion": [
+          "Total conversion of our apis to use bearer token (JWT) instead of basic auth",
+          "Developed a service to scan and report customers potentially hosting CSAM.",
+          "Secured our source code by eliminating all secrets using tools like trufflehog",
+          "Converted to AWS/ASM for secrets management across the entire product",
+          "Fully eliminated the need for “at rest” encrypted credential files in our environment",
+          "Developed and wrote 90% of my team’s threat models",
+          "Active participant with our security team on pen tests",
+          "Involved with the deployment and use of Illumio"
+        ]
+      }
+    },
+    {
+      "startDate": "2006",
+      "endDate": "2011",
+      "companyName": "Microsoft",
+      "jobTitle": "SDET II",
+      "teamName": "Safety Platform",
+      "jobfunctions": {
+        "Accomplishments": [
+          "Responsible for maintaining the antispam training systems used within Outlook, Exchange and Hotmail",
+          "Designed and Tested URS, a high capacity web service that handled approximately half a billion raw hits per day",
+          "Involved in the testing and validation of the Safety Platform's Malware focused site reputation system"
+        ]
+      }
+    }
+  ]
+}
