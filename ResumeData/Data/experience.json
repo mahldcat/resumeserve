@@ -1,12 +1,12 @@
 {
-  "experience": [
+  "jobExperience": [
     {
       "startDate": "2011",
       "endDate": "2024",
       "companyName": "GoDaddy",
       "jobTitle": "Lead Developer and Manager",
       "teamName": "Windows Hosting using Plesk",
-      "jobfunctions": {
+      "jobFunctions": {
         "Customer focus": [
           "Managed the hosting platform that hosts 490,000 individual websites consuming ~300 TB of data, 120,000 MSSQL servers and 145,000 MySql databases",
           "I handled over 90% of our customer tickets, ~30% used to improve the product",
@@ -56,7 +56,7 @@
       "companyName": "Microsoft",
       "jobTitle": "SDET II",
       "teamName": "Safety Platform",
-      "jobfunctions": {
+      "jobFunctions": {
         "Accomplishments": [
           "Responsible for maintaining the antispam training systems used within Outlook, Exchange and Hotmail",
           "Designed and Tested URS, a high capacity web service that handled approximately half a billion raw hits per day",
