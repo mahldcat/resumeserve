@@ -14,7 +14,10 @@ public class Profile : DataFile<Profile>
     
     [JsonPropertyName("email")]
     public string Email { get; set; }
-    
+
+    [JsonPropertyName("phone")] 
+    public string Phone { get; set; }
+
     [JsonPropertyName("introParagraph")]
     public string IntroParagraph { get; set; }
 
