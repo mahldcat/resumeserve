@@ -1,52 +1,64 @@
 {
   "jobExperience": [
     {
-      "startDate": "2011",
+      "startDate": "2019",
       "endDate": "2024",
       "companyName": "GoDaddy",
       "jobTitle": "Lead Developer and Manager",
-      "teamName": "Windows Hosting using Plesk",
+      "teamName": "Hosting (Windows/Plesk)",
+      "summary": "Dev Lead on the Plesk Platform- a for a Windows Shared Hosting platform that hosts 490,000 websites consuming ~300 TB of data, 120,000 MSSQL servers and 145,000 MySql databases.",
       "jobFunctions": {
-        "Customer focus": [
-          "Managed the hosting platform that hosts 490,000 individual websites consuming ~300 TB of data, 120,000 MSSQL servers and 145,000 MySql databases",
-          "I handled over 90% of our customer tickets, ~30% used to improve the product",
-          "Involved Customer Care in our day to day operations",
-          "Involved with Service Now Automation—CI/CD automation and Incident Creation leading to faster deployments and better incident tracking",
-          "Worked with SRE to deploy metricbeats, allowing us to quickly identify where we could improve performance, and identify potentially abusive customers."
-        ],
-        "Management, Mentorship, Cross team collaboration": [
-          "Partnered with my team's PM to oversee, plan and cost out our initiatives",
+        "General Responsibilities": [
+          "Worked with my team's PM to oversee, plan and cost out our initiatives",
+          "Continued my duties as Scrum Master",
           "Managed a team of developers overseeing their careers and promotions",
           "Successfully mentored multiple college interns, each leading to a job offer",
-          "Almost daily collaboration with partner teams over Zoom and Slack"
+          "Security Champion for my team"
         ],
-        "SDLC": [
-          "Scrum master for more than 8 years using Jira as the task management system",
-          "Owned and Developed my team’s CI/CD workflows",
-          "Migrated many of our systems onto chocolatey-- simplifying deployments",
-          "Have been using a Pull Request/Peer review process for > 10 years"
-        ],
-        "Simplification": [
-          "Eliminated 80% of our internal APIs",
+        "Accomplishments": [
+          "Partnered with product owners to reduce our backlog by 20%",
           "Continuous refactoring of our REST APIs, leading to a 20% code reduction in 2023",
-          "Conversion from .net 4.8 to .net 8 leading to further code simplification",
-          "Converted team over to a new ecommerce system simplifying account management" 
-        ],
-        "Complex Project Management": [
-          "Successfully migrated more than 130,000 customer from legacy hosting to Plesk",
-          "Hypervisor and VM upgrades ( > 800 servers) to latest Windows / Plesk",
-          "Data Center moves/reorganizations involving more than 80 web hosts",
-          "Bulk customer DNS updates (more than 100,000 sites to date)"
-        ],
-        "Security Champion": [
-          "Total conversion of our apis to use bearer token (JWT) instead of basic auth",
-          "Developed a service to scan and report customers potentially hosting CSAM.",
-          "Secured our source code by eliminating all secrets using tools like trufflehog",
-          "Converted to AWS/ASM for secrets management across the entire product",
-          "Fully eliminated the need for “at rest” encrypted credential files in our environment",
-          "Developed and wrote 90% of my team’s threat models",
-          "Active participant with our security team on pen tests",
-          "Involved with the deployment and use of Illumio"
+          "API conversion of AuthZ from Basic to Bearer Token and Mutual TLS",
+          "Ongoing code conversion from .net 4.8 to .net 8",
+          "Created integration test suite used to verify our DEV and TEST environments",
+          "Converted systems to use AWS/ASM for secrets management",
+          "Successfully migrated more than 130,000 customers from legacy hosting to Plesk",
+          "Hypervisor and VM upgrades (>800 servers) to latest versions of Windows / Plesk",
+          "Created / Implemented a process to migrate customer DNS (more than 100,000 sites)",
+          "Led the team and created 90% of the product’s threat models"
+        ]
+      }
+    },
+    {
+      "startDate": "2014",
+      "endDate": "2019",
+      "companyName": "GoDaddy",
+      "jobTitle": "SDE III",
+      "teamName": "Hosting Division",
+      "summary": "SDE III on the Plesk Plaform",
+      "jobFunctions": {
+        "Responsibilities and Accomplishments": [
+          "Began duties as my product’s Scrum Master",
+          "Developed a replacement management UI for the platform using React",
+          "Developed the next gen shared hosting platform as a replacement for 4gh windows",
+          "Implemented our CI/CD infrastructure using Jenkins, Powershell, Git, and .Net",
+          "Implemented a monolithic API on .Net to manage our platform",
+          "Created a service that integrated with Kafka as a consumer"
+        ]
+      }
+    },
+    {
+      "startDate": "2011",
+      "endDate": "2014",
+      "companyName": "GoDaddy",
+      "jobTitle": "SDE II",
+      "teamName": "Hosting Division",
+      "summary": "SDET II on 4gh and Virtual Data Center Teams",
+      "jobFunctions": {
+        "Responsibilities and Accomplishments": [
+          "UI test automation with Selenium",
+          "Golden image test automation, reducing test time from 2 days to 2 hours",
+          "Verified the UI for 4gh hosting product, bringing an improved file manager to market"
         ]
       }
     },
@@ -56,8 +68,9 @@
       "companyName": "Microsoft",
       "jobTitle": "SDET II",
       "teamName": "Safety Platform",
+      "summary": "Team that keeps spam out of your Inbox",
       "jobFunctions": {
-        "Accomplishments": [
+        "Responsibilities and Accomplishments": [
           "Responsible for maintaining the antispam training systems used within Outlook, Exchange and Hotmail",
           "Designed and Tested URS, a high capacity web service that handled approximately half a billion raw hits per day",
           "Involved in the testing and validation of the Safety Platform's Malware focused site reputation system"

@@ -18,6 +18,9 @@ public class Company
 
     [JsonPropertyName("teamName")] 
     public string TeamName { get; set; }
+    
+    [JsonPropertyName("summary")]
+    public string Summary { get; set; }
 
     [JsonPropertyName("jobFunctions")] 
     public IDictionary<string, IList<string>> JobFunctions { get; set; }
