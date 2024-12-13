@@ -28,8 +28,8 @@ jobs:
       - name: Restore, build, and publish
         run: |
           dotnet restore
-          dotnet build ResumeData\ResumeData.csproj --configuration Release
-          dotnet publish ResumeData\ResumeData.csproj --configuration Release -o ./publish
+          dotnet build $GITHUB_WORKSPACE/ResumeData/ResumeData.csproj --configuration Release
+          dotnet publish $GITHUB_WORKSPACE/ResumeData/ResumeData.csproj --configuration Release -o $GITHUB_WORKSPACE/publish
 
       # Upload build to remote server using FTPS
       - name: Deploy to remote server
