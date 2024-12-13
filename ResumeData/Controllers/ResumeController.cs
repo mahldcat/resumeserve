@@ -1,4 +1,3 @@
-
 using Microsoft.AspNetCore.Mvc;
 using ResumeData.Data;
 
@@ -41,6 +40,13 @@ namespace ResumeData.Controllers
         public Experience? Experience()
         {
             return Data.Experience.FromFile();
+        }
+        
+        [Route("references")]
+        [HttpGet]
+        public ProfessionalReferences? References()
+        {
+            return Data.ProfessionalReferences.FromFile();
         }
     }
 }
