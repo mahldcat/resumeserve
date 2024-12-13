@@ -1,7 +1,14 @@
+using Microsoft.OpenApi.Models;
+
 var builder = WebApplication.CreateBuilder(args);
+builder.Services.AddSwaggerGen(c =>
+{
+    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Resume API", Version = "v1" });
+});
 
 builder.Services.AddControllers();
-builder.Services.AddSwaggerGen();
+
+
 
 builder.Services.AddCors(options =>
 {
@@ -38,11 +45,18 @@ app.UseCors("AllowHyperioSubdomains");
 app.UseCors("AllowHyperioRoot");
 
 app.MapControllers();
-if (app.Environment.IsDevelopment())
+
+app.UseSwagger(c =>
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
+    c.RouteTemplate = "v1/resume/{documentName}/swagger.json"; // Custom route for Swagger JSON
+});
+app.UseSwaggerUI(c =>
+{
+    c.SwaggerEndpoint("/v1/resume/v1/swagger.json", "Resume API v1");
+    c.RoutePrefix = "v1/resume"; // Serve Swagger UI at /v1/resume
+});
+
+
 //kill this for now....
 //app.UseHttpsRedirection();
 app.Run();
