@@ -1,0 +1,32 @@
+{
+  "references": [
+    {
+      "name": "Benjamin Rubin",
+      "description": "Product Owner from GoDaddy",
+      "linkedIn": "<redacted>",
+      "email": "<redacted>",
+      "phone": "<redacted>"
+    },
+    {
+      "name": "Paul Smith",
+      "description": "Colleague and direct report from GoDaddy",
+      "linkedIn": "<redacted>",
+      "email": "<redacted>",
+      "phone": "<redacted>"
+    },
+    {
+      "name": "Tim Driscoll",
+      "description": "Colleague at GoDaddy",
+      "linkedIn": "<redacted>",
+      "email": "<redacted>",
+      "phone": "<redacted>"
+    },
+    {
+      "name": "Paul Brunner",
+      "description": "Colleague and direct report from GoDaddy",
+      "linkedIn": "<redacted>",
+      "email": "<redacted>",
+      "phone": "<redacted>"
+    }
+  ]
+}
