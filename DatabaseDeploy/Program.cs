@@ -5,12 +5,12 @@ namespace DatabaseDeploy;
 
 public class Program
 {
-    private const string EnvName = "PaginatedDataConnection";
+    private const string EnvName = "PAGINATION_DBCONN";
     public static void Main(string[] args)
     {
         if (Environment.GetEnvironmentVariable(EnvName) == null)
         {
-            Console.Error.WriteLine($"Environment Variable {EnvName} is not set");
+            Console.Error.WriteLine($"Environment Variable '{EnvName}' is not set");
             Environment.ExitCode = -1;
         }
         else
@@ -33,6 +33,11 @@ public class Program
         try
         {
             var sqlConnection = new SqlConnection(Environment.GetEnvironmentVariable(EnvName));
+
+            Assembly a = Assembly.GetExecutingAssembly();
+            Assembly a2 = Assembly.GetCallingAssembly();
+            
+            Console.WriteLine($"Assemly: {a.FullName} CAsm:{a2.FullName}");
             var evolve = new EvolveDb.Evolve(sqlConnection, (msg)=>Console.WriteLine(msg))
             {
                 EmbeddedResourceAssemblies = new[] { Assembly.GetExecutingAssembly() },

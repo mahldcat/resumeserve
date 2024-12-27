@@ -1,16 +1,16 @@
+using DataAccess;
 using Microsoft.OpenApi.Models;
 
+
 WebApplicationBuilder builder = WebApplication.CreateBuilder(args);
-builder.Services.AddSwaggerGen(c =>
-{
-    c.SwaggerDoc("v1", new OpenApiInfo { Title = "Resume API", Version = "v1" });
-});
+builder.BuildPaginatedDataConnection()
 
-builder.Services.AddControllers();
-
-
-
-builder.Services.AddCors(options =>
+.Services.AddTransient<IPaginatedData,PaginatedData>()
+.AddSwaggerGen(c =>
+    {
+        c.SwaggerDoc("v1", new OpenApiInfo { Title = "Resume API", Version = "v1" });
+    })
+.AddCors(options =>
 {
     options.AddPolicy("AllowAnyLocalhost", policy =>
     {
@@ -19,7 +19,6 @@ builder.Services.AddCors(options =>
             .AllowAnyHeader()
             .AllowAnyMethod();
     });
-    
     options.AddPolicy("AllowHyperioSubdomains", policy =>
     {
         policy.SetIsOriginAllowed(origin => 
@@ -36,21 +35,18 @@ builder.Services.AddCors(options =>
             .AllowAnyHeader()
             .AllowAnyMethod();
     });
-    
-});
+})
+.AddControllers();
 
 var app = builder.Build();
-app.UseCors("AllowAnyLocalhost");
-app.UseCors("AllowHyperioSubdomains");
-app.UseCors("AllowHyperioRoot");
+app.UseCors("AllowAnyLocalhost").UseCors("AllowHyperioSubdomains").UseCors("AllowHyperioRoot");
 
 app.MapControllers();
 
 app.UseSwagger(c =>
 {
     c.RouteTemplate = "v1/resume/{documentName}/swagger.json"; // Custom route for Swagger JSON
-});
-app.UseSwaggerUI(c =>
+}).UseSwaggerUI(c =>
 {
     c.SwaggerEndpoint("/v1/resume/v1/swagger.json", "Resume API v1");
     c.RoutePrefix = "v1/resume"; // Serve Swagger UI at /v1/resume

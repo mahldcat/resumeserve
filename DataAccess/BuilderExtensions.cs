@@ -5,18 +5,18 @@ using Microsoft.Extensions.Hosting;
 
 namespace DataAccess;
 
-public static class BuilderExtensions
+public static class Extensions
 {
     public const string ApphostPaginatedName = "PaginatedDataConnection";
     public const string ApphostResumeName = "ResumeDataConnection";
     
-    public static IHostApplicationBuilder BuildPaginatedData(IHostApplicationBuilder builder)
+    public static IHostApplicationBuilder BuildPaginatedDataConnection(this IHostApplicationBuilder builder)
     {
         string paginatedConnectionString = builder.Configuration.GetConnectionString(ApphostPaginatedName)!;
         builder.Services.AddTransient<PaginatedDataConnection>(sp => new PaginatedDataConnection(new SqlConnection(paginatedConnectionString)));
         return builder;
     }
-    public static IHostApplicationBuilder BuildResumeData(IHostApplicationBuilder builder)
+    public static IHostApplicationBuilder BuildResumeDataConnection(this IHostApplicationBuilder builder)
     {
         string paginatedConnectionString = builder.Configuration.GetConnectionString(ApphostResumeName)!;
         builder.Services.AddTransient<ResumeDataConnection>(sp => new ResumeDataConnection(new SqlConnection(paginatedConnectionString)));
