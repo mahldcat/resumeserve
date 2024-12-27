@@ -31,7 +31,26 @@ jobs:
           dotnet build $GITHUB_WORKSPACE/ResumeData/ResumeData.csproj --configuration Release
           dotnet publish $GITHUB_WORKSPACE/ResumeData/ResumeData.csproj --configuration Release -o $GITHUB_WORKSPACE/publish
 
-      # Upload build to remote server using FTPS
+      - name: Database Restore, build, and publish
+        run: |
+          dotnet restore
+          dotnet build $GITHUB_WORKSPACE/Database/Database.csproj --configuration Release
+          dotnet publish $GITHUB_WORKSPACE/Database/Database.csproj --configuration Release -o $GITHUB_WORKSPACE/publishDb
+
+      - name: Database Restore, build, and publish
+        env:
+          PAGINATION_DBCONN: ${{ secrets.PAGINATION_DBCONN }}
+        run: |
+            $GITHUB_WORKSPACE/publishDb/DatabaseDeploy.exe
+
+      - name: Update DatabaseConnection
+        env:
+          PAGINATION_DBCONN: ${{ secrets.PAGINATION_DBCONN }}
+        run: |
+          jq '.ConnectionStrings.PaginatedDataConnection = env.PAGINATION_DBCONN' $GITHUB_WORKSPACE/publish/appsettings.json > $GITHUB_WORKSPACE/publisht $GITHUB_WORKSPACE/publish/temp.json
+          mv $GITHUB_WORKSPACE/publish/temp.json $GITHUB_WORKSPACE/publish/appsettings.json  
+  
+      # Upload build to remote server using FTPS and after this clobber the appsettings.json file
       - name: Deploy to remote server
         env:
           # The user should be scope limited to the root of the site (e.g. sub folder)
@@ -40,3 +59,4 @@ jobs:
           FTPS_HOST: ${{ secrets.FTPS_HOST }}
         run: |
           lftp -u $FTPS_USER,$FTPS_PASS -e "set ssl:verify-certificate no; mirror -R publish / && quit" $FTPS_HOST
+          rm $GITHUB_WORKSPACE/publish/appsettings.json

@@ -5,6 +5,10 @@ project.lock.json
 *.pyc
 nupkg/
 
+#publish
+publish/
+publishDb/
+
 # Visual Studio Code
 .vscode/
 
