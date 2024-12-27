@@ -34,8 +34,8 @@ jobs:
       - name: Database Restore, build, and publish
         run: |
           dotnet restore
-          dotnet build $GITHUB_WORKSPACE/Database/Database.csproj --configuration Release
-          dotnet publish $GITHUB_WORKSPACE/Database/Database.csproj --configuration Release -o $GITHUB_WORKSPACE/publishDb
+          dotnet build $GITHUB_WORKSPACE/DatabaseDeploy/DatabaseDeploy.csproj --configuration Release
+          dotnet publish $GITHUB_WORKSPACE/DatabaseDeploy/DatabaseDeploy.csproj --configuration Release -o $GITHUB_WORKSPACE/publishDb
 
       - name: Database Restore, build, and publish
         env:
@@ -46,9 +46,12 @@ jobs:
       - name: Update DatabaseConnection
         env:
           PAGINATION_DBCONN: ${{ secrets.PAGINATION_DBCONN }}
+          RESUME_DBCONN: ${{ secrets.RESUME_DBCONN }}
         run: |
-          jq '.ConnectionStrings.PaginatedDataConnection = env.PAGINATION_DBCONN' $GITHUB_WORKSPACE/publish/appsettings.json > $GITHUB_WORKSPACE/publisht $GITHUB_WORKSPACE/publish/temp.json
-          mv $GITHUB_WORKSPACE/publish/temp.json $GITHUB_WORKSPACE/publish/appsettings.json  
+          jq '.ConnectionStrings.PaginatedDataConnection = env.PAGINATION_DBCONN' $GITHUB_WORKSPACE/publish/appsettings.json > $GITHUB_WORKSPACE/publish/temp.json
+          jq '.ConnectionStrings.PaginatedDataConnection = env.PAGINATION_DBCONN' $GITHUB_WORKSPACE/publish/temp.json > $GITHUB_WORKSPACE/publish/temp2.json          
+          mv $GITHUB_WORKSPACE/publish/temp2.json $GITHUB_WORKSPACE/publish/appsettings.json
+          rm $GITHUB_WORKSPACE/publish/temp.json  
   
       # Upload build to remote server using FTPS and after this clobber the appsettings.json file
       - name: Deploy to remote server
