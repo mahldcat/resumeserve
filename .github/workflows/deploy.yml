@@ -4,10 +4,18 @@ on:
   push:
     branches:
       - main
-
+    workflow_dispatch: # Allows manual triggering
+      inputs:
+        branch:
+          description: "Branch to build and deploy"
+          required: false
+          default: main
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    env: # Define global environment variables for the job
+      PUB_DIR_DBDEP: ${{ github.workspace }}/publishDb
+      PUB_DIR_SVC: ${{ github.workspace}}/publish
 
     steps:
       # Checkout the repository
@@ -29,29 +37,35 @@ jobs:
         run: |
           dotnet restore
           dotnet build $GITHUB_WORKSPACE/ResumeData/ResumeData.csproj --configuration Release
-          dotnet publish $GITHUB_WORKSPACE/ResumeData/ResumeData.csproj --configuration Release -o $GITHUB_WORKSPACE/publish
+          dotnet publish $GITHUB_WORKSPACE/ResumeData/ResumeData.csproj --configuration Release -o $PUB_DIR_SVC
 
       - name: Database Restore, build, and publish
         run: |
           dotnet restore
           dotnet build $GITHUB_WORKSPACE/DatabaseDeploy/DatabaseDeploy.csproj --configuration Release
+          dotnet publish $GITHUB_WORKSPACE/DatabaseDeploy/DatabaseDeploy.csproj --configuration Release -o $PUB_DIR_DBDEP
+      - name: Log Workspace Contents
+        run: |
+          echo "Contents of $PUB_DIR_SVC:"
+          ls -R $PUB_DIR_DBDEP
+        
+      - name: Database Deploy
           dotnet publish $GITHUB_WORKSPACE/DatabaseDeploy/DatabaseDeploy.csproj --configuration Release -o $GITHUB_WORKSPACE/publishDb
 
-      - name: Database Restore, build, and publish
         env:
           PAGINATION_DBCONN: ${{ secrets.PAGINATION_DBCONN }}
         run: |
-            $GITHUB_WORKSPACE/publishDb/DatabaseDeploy.exe
+            $PUB_DIR_DBDEP/DatabaseDeploy.exe
 
       - name: Update DatabaseConnection
         env:
           PAGINATION_DBCONN: ${{ secrets.PAGINATION_DBCONN }}
           RESUME_DBCONN: ${{ secrets.RESUME_DBCONN }}
         run: |
-          jq '.ConnectionStrings.PaginatedDataConnection = env.PAGINATION_DBCONN' $GITHUB_WORKSPACE/publish/appsettings.json > $GITHUB_WORKSPACE/publish/temp.json
-          jq '.ConnectionStrings.PaginatedDataConnection = env.PAGINATION_DBCONN' $GITHUB_WORKSPACE/publish/temp.json > $GITHUB_WORKSPACE/publish/temp2.json          
-          mv $GITHUB_WORKSPACE/publish/temp2.json $GITHUB_WORKSPACE/publish/appsettings.json
-          rm $GITHUB_WORKSPACE/publish/temp.json  
+          jq '.ConnectionStrings.PaginatedDataConnection = env.PAGINATION_DBCONN' $PUB_DIR_SVC/appsettings.json > $PUB_DIR_SVC/temp.json
+          jq '.ConnectionStrings.PaginatedDataConnection = env.PAGINATION_DBCONN' $PUB_DIR_SVC/temp.json > $PUB_DIR_SVC/temp2.json          
+          mv $PUB_DIR_SVC/temp2.json $PUB_DIR_SVC/appsettings.json
+          rm $PUB_DIR_SVC/temp.json  
   
       # Upload build to remote server using FTPS and after this clobber the appsettings.json file
       - name: Deploy to remote server
@@ -62,4 +76,4 @@ jobs:
           FTPS_HOST: ${{ secrets.FTPS_HOST }}
         run: |
           lftp -u $FTPS_USER,$FTPS_PASS -e "set ssl:verify-certificate no; mirror -R publish / && quit" $FTPS_HOST
-          rm $GITHUB_WORKSPACE/publish/appsettings.json
+          rm $PUB_DIR_SVC/appsettings.json
