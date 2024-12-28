@@ -50,6 +50,8 @@ jobs:
           ls -R $PUB_DIR_DBDEP
         
       - name: Database Deploy
+          dotnet publish $GITHUB_WORKSPACE/DatabaseDeploy/DatabaseDeploy.csproj --configuration Release -o $GITHUB_WORKSPACE/publishDb
+
         env:
           PAGINATION_DBCONN: ${{ secrets.PAGINATION_DBCONN }}
         run: |
