@@ -14,7 +14,7 @@ public class PaginatedData(PaginatedDataConnection connection) : IPaginatedData
     /// </summary>
     public async Task<PaginatedDataEntry> FetchByIdAsync(int id)
     {
-        string sql = "SELECT * FROM PaginatedDataEntry WHERE Id = @Id";
+        string sql = "SELECT * FROM PaginatedData WHERE Id = @Id";
         return (await _dbConnection.QuerySingleOrDefaultAsync<PaginatedDataEntry>(sql, new { Id = id }))!;
     }
 
@@ -38,7 +38,7 @@ public class PaginatedData(PaginatedDataConnection connection) : IPaginatedData
     /// <param name="page">page to fetch (1 indexed)</param>
     /// <param name="maxPageSize">total entries to include per page</param>
     /// <returns>Entries for the given page/pagesize, and the count of pages estimated by the filter</returns>
-    public async Task<(IList<PaginatedDataEntry> Entries, int TotalCount)> FetchByIdAsync(int page, int maxPageSize)
+    public async Task<(IList<PaginatedDataEntry> Entries, int TotalPages)> FetchByIdAsync(int page, int maxPageSize)
     {
         int offset = (page - 1) * maxPageSize;
         
@@ -53,8 +53,7 @@ public class PaginatedData(PaginatedDataConnection connection) : IPaginatedData
         // Query to fetch the total count
         string countQuery = @"
         SELECT COUNT(*) 
-        FROM PaginatedData 
-        WHERE Updated >= @Date OR Created >= @Date";
+        FROM PaginatedData";
 
         using var multi = await _dbConnection.QueryMultipleAsync($"{dataQuery};{countQuery}", new
         {
@@ -75,7 +74,7 @@ public class PaginatedData(PaginatedDataConnection connection) : IPaginatedData
     /// <param name="page">page to fetch (1 indexed)</param>
     /// <param name="maxPageSize">total entries to include per page</param>
     /// <returns>entries for the page, and an estimated max page countr</returns>
-    public async Task<(IList<PaginatedDataEntry> Entries, int TotalCount)> FetchByUpdatedOrCreatedAsync(DateTime date,
+    public async Task<(IList<PaginatedDataEntry> Entries, int TotalPages)> FetchByUpdatedOrCreatedAsync(DateTime date,
         int page, int maxPageSize)
     {
         int offset = (page - 1) * maxPageSize;

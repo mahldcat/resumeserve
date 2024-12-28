@@ -44,11 +44,6 @@ jobs:
           dotnet restore
           dotnet build $GITHUB_WORKSPACE/DatabaseDeploy/DatabaseDeploy.csproj --configuration Release
           dotnet publish $GITHUB_WORKSPACE/DatabaseDeploy/DatabaseDeploy.csproj --configuration Release -o $PUB_DIR_DBDEP
-      - name: Log Workspace Contents
-        run: |
-          echo "Contents of $PUB_DIR_SVC:"
-          ls -R $PUB_DIR_DBDEP
-        
       - name: Database Deploy
           dotnet publish $GITHUB_WORKSPACE/DatabaseDeploy/DatabaseDeploy.csproj --configuration Release -o $GITHUB_WORKSPACE/publishDb
 
@@ -57,13 +52,15 @@ jobs:
         run: |
             $PUB_DIR_DBDEP/DatabaseDeploy
 
+      # I could technically run a | for the jq calls...but the line length gets obnoxious
+      # (and I really don't want to fight multi line syntax)    
       - name: Update DatabaseConnection
         env:
           PAGINATION_DBCONN: ${{ secrets.PAGINATION_DBCONN }}
           RESUME_DBCONN: ${{ secrets.RESUME_DBCONN }}
         run: |
           jq '.ConnectionStrings.PaginatedDataConnection = env.PAGINATION_DBCONN' $PUB_DIR_SVC/appsettings.json > $PUB_DIR_SVC/temp.json
-          jq '.ConnectionStrings.PaginatedDataConnection = env.PAGINATION_DBCONN' $PUB_DIR_SVC/temp.json > $PUB_DIR_SVC/temp2.json          
+          jq '.ConnectionStrings.ResumeDataConnection = env.RESUME_DBCONN' $PUB_DIR_SVC/temp.json > $PUB_DIR_SVC/temp2.json          
           mv $PUB_DIR_SVC/temp2.json $PUB_DIR_SVC/appsettings.json
           rm $PUB_DIR_SVC/temp.json  
   
