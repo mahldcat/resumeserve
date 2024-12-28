@@ -4,7 +4,12 @@ on:
   push:
     branches:
       - main
-
+    workflow_dispatch: # Allows manual triggering
+      inputs:
+        branch:
+          description: "Branch to build and deploy"
+          required: false
+          default: main
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
