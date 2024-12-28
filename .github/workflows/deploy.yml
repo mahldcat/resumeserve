@@ -55,7 +55,7 @@ jobs:
         env:
           PAGINATION_DBCONN: ${{ secrets.PAGINATION_DBCONN }}
         run: |
-            $PUB_DIR_DBDEP/DatabaseDeploy.exe
+            $PUB_DIR_DBDEP/DatabaseDeploy
 
       - name: Update DatabaseConnection
         env:
